@@ -1,0 +1,35 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Vessel {
+  id       Int    @id @unique
+  name     String
+  type     Int
+  logs     Log[]
+}
+
+model Log {
+  id         Int    @id @default(autoincrement())
+  logID      BigInt
+  vesselId   Int
+  date       DateTime
+  AERCO2T2W  Float
+  vessel     Vessel @relation(fields: [vesselId], references: [id])
+}
+
+model PPReference {
+  id           Int    @id @default(autoincrement())
+  vesselTypeID Int
+  traj         String
+  a            Float
+  b            Float
+  c            Float
+  d            Float
+  e            Float
+}
