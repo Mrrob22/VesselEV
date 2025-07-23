@@ -12,6 +12,7 @@ model Vessel {
   name     String
   type     Int
   logs     Log[]
+  dwt      Float @default(50000)
 }
 
 model Log {

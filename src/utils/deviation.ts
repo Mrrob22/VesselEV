@@ -4,7 +4,7 @@ import Decimal from 'decimal.js'
 
 const prisma = new PrismaClient()
 
-type QuarterDeviation = {
+export type QuarterDeviation = {
     quarter: string
     actual: number
     baseline: number
@@ -53,7 +53,7 @@ export async function getQuarterDeviations(vesselId: number): Promise<QuarterDev
         const { min } = calculatePPSCCBaselines({
             factors: refs,
             year,
-            DWT: new Decimal(50000),
+            DWT: new Decimal(vessel.dwt),
         })
 
         const actual = new Decimal(log.AERCO2T2W)
